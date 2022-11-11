@@ -106,12 +106,22 @@ public class Car {
         return registrationNumber;
     }
 
-    public void setRegistrationNumber(String registrationNumber) {
+    public boolean setRegistrationNumber(String registrationNumber) {
         if (registrationNumber.length() != 9 && registrationNumber.isEmpty() && registrationNumber.isBlank()) {
-            this.registrationNumber = "Указан не верный формат номера или номер не указан";
-        } else {
-            this.registrationNumber = registrationNumber;
+            this.registrationNumber = "ошибка";
+            return false;
         }
+        char[] chars = registrationNumber.toCharArray();
+        if (!Character.isAlphabetic(chars[0]) || !Character.isAlphabetic(chars[4]) || !Character.isAlphabetic(chars[5])) {
+            this.registrationNumber = "ошибка";
+            return false;
+        }
+        if (!Character.isDigit(chars[1]) || !Character.isDigit(chars[2]) || !Character.isDigit(chars[3])
+                || !Character.isDigit(chars[6]) || !Character.isDigit(chars[7]) || !Character.isDigit(chars[8])){
+            return false;
+        }
+        return true;
+
     }
 
     public boolean getSummerTires() {

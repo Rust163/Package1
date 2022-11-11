@@ -11,11 +11,12 @@ public class Main {
                 1.7,
                 "",
                 "хетчбек",
-                "М659О163",
+                "М6590М163",
                 5,
                 true);
         lada.setSummerTires(false);
-        lada.setRegistrationNumber("acascacss");
+        lada.setRegistrationNumber("М659СМ163");
+        System.out.println(lada.checkRegistrationNumber());
 
         Car audi = new Car(
                 "AUDI",
@@ -69,11 +70,12 @@ public class Main {
                 1.6,
                 "АКПП",
                 "седан",
-                "c986сс163",
+                "С963КЕ163",
                 5,
                 true);
         hyundai.setSummerTires(false);
-        hyundai.setRegistrationNumber("С15611163");
+        hyundai.setRegistrationNumber("М23ccc163");
+        System.out.println(hyundai.checkRegistrationNumber());
 
 
         lada.info();
