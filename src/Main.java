@@ -1,23 +1,107 @@
 import transport.Car;
 
+import java.time.LocalDate;
+
 public class Main {
     public static void main(String[] args) {
-        Car ladaGranta = new Car("LADA", "Granta", 2015, "Россия", "желтый", 1.7);
-        Car audiA8 = new Car("AUDI", "A8 50L TDI quattro", 2020, "Германия", "черный", 3.0);
-        Car bmwZ8 = new Car("BMW", "Z8", 2021, "Германия", "черный", 3.0);
-        Car kiaSportage = new Car("KIA", "Sportage 4-го поколения", 2018, "Южная Корея", "красный", 2.4);
-        Car hyundaiAvante = new Car("HYUNDAI", "Avante", 2016, "Южная корея", "оранжевый", 1.6);
 
-        ladaGranta.info();
-        audiA8.info();
-        bmwZ8.info();
-        kiaSportage.info();
-        hyundaiAvante.info();
+        Car car1 = new Car(
+                "Lada",
+                "Granta",
+                1.7f,
+                "жёлтый",
+                2015,
+                "Россия",
+                null,
+                "лифтбэк",
+                "а771тм092",
+                5,
+                true,
+                null,
+                null);
+        car1.setColor("розовый");
 
-        System.out.println(ladaGranta.toString());
-        System.out.println(audiA8.toString());
-        System.out.println(bmwZ8.toString());
-        System.out.println(kiaSportage.toString());
-        System.out.println(hyundaiAvante.toString());
+        Car car2 = new Car(
+                "Audi",
+                "A8 50 L TDI quattro",
+                3.0f,
+                "чёрный",
+                2020,
+                "Германия");
+        car2.setTransmissionBox("АКПП");
+        car2.setKey(new Car.Key(true,true));
+
+        Car car3 = new Car(
+                "BMW",
+                "Z8",
+                3.0f,
+                "чёрный",
+                2021,
+                "Германия");
+        car3.setTransmissionBox("АКПП");
+        car3.setSummerTires(false);
+
+        Car car4 = new Car(
+                "KIA",
+                "Sportage 4-го поколения",
+                2.4f,
+                "красный",
+                2018,
+                "Южная Корея");
+        car4.setTransmissionBox("АКПП");
+
+        Car car5 = new Car(
+                "Hyundai",
+                "Avante",
+                1.6f,
+                "оранжевый",
+                2016,
+                "Южная корея");
+        car5.setRegistrationNumber("a078a1777");
+        car5.setInsurance(new Car.Insurance(LocalDate.of(2022, 12, 12),
+                10000, "131313131"));
+        borderLine();
+        printCarInfo(car1);
+        System.out.println("Корректный регистрационный номер? " + car1.checkingRegistrationNumber());
+        borderLine();
+        printCarInfo(car2);
+        System.out.println("Корректный регистрационный номер? " + car2.checkingRegistrationNumber());
+        borderLine();
+        printCarInfo(car3);
+        System.out.println("Корректный регистрационный номер? " + car3.checkingRegistrationNumber());
+        borderLine();
+        printCarInfo(car4);
+        System.out.println("Корректный регистрационный номер? " + car4.checkingRegistrationNumber());
+        borderLine();
+        printCarInfo(car5);
+        System.out.println("Корректный регистрационный номер? " + car5.checkingRegistrationNumber());
+        borderLine();
+        car5.getInsurance().checkExpiryDate();
+        car5.getInsurance().checkInsuranceNumber();
+    }
+
+    private static void printCarInfo(Car car) {
+        System.out.println(
+                "Автомобиль. Марка: " + car.getBrand() +
+                        ". Модель: " + car.getModel() +
+                        ". Объём двигателя: " + car.getEngineVolume() +
+                        ". Коробка передач: " + car.getTransmissionBox() +
+                        ". Тип кузова: " + car.getBodyType() +
+                        ". Количество мест: " + car.getNumberOfSeats() +
+                        ". Цвет кузова: " + car.getColor() +
+                        ". " + (car.getSummerTires() ? "Летняя" : "Зимняя") + " резина" +
+                        ". Год выпуска: " + car.getYear() +
+                        ". Страная производитель: " + car.getCountry() +
+                        ". Регистрационный номер: " + car.getRegistrationNumber() +
+                        "." + (car.getKey().isKeylessAccess() ? " Бесключевой доступ!" : " Ключевой доступ!") +
+                        (car.getKey().isRemoteEngineStart() ?
+                                " Есть удалённый запуск двигателя!" : " Нет удалённого запуска двигателя!") +
+                        " Номер страховки: " + car.getInsurance().getInsuranceNumber() +
+                        ". Стоимость страховки: " + car.getInsurance().getInsuranceCost() +
+                        ". Срок действия страховки: " + car.getInsurance().getInsurancePeriod());
+    }
+
+    public static void borderLine() {
+        System.out.println("===========================================================================================================");
     }
 }
