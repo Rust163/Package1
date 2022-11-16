@@ -2,12 +2,27 @@ package transport;
 
 import java.time.LocalDate;
 
-public class Car {
+public class Car extends Transport {
+    @Override
+    public void refill() {
+        String gas = "Бензин";
+        String diesel = "Дизель";
+        String electrical = "ЭлектроКар";
+        if (getFuel().equalsIgnoreCase(gas)) {
+            System.out.println("нужно заправлять бензином");
+        }
+        if (getFuel().equalsIgnoreCase(diesel)) {
+            System.out.println("нужно заправлять дизельным топливом");
+        }
+        if (getFuel().equalsIgnoreCase(electrical)) {
+            System.out.println("нужно заряжать электричеством");
+        }
+    }
 
     public static class Key {
 
-        private final boolean remoteEngineStart;
-        private final boolean keylessAccess;
+        protected final boolean remoteEngineStart;
+        protected final boolean keylessAccess;
 
         public Key(boolean remoteEngineStart, boolean keylessAccess) {
             this.remoteEngineStart = remoteEngineStart;
@@ -32,7 +47,10 @@ public class Car {
         private final double insuranceCost;
         private final String insuranceNumber;
 
-        public Insurance(LocalDate insurancePeriod, double insuranceCost, String insuranceNumber) {
+        public Insurance(
+                LocalDate insurancePeriod,
+                double insuranceCost,
+                String insuranceNumber) {
             if (insurancePeriod == null) {
                 this.insurancePeriod = LocalDate.now().plusDays(365);
             } else {
@@ -47,7 +65,7 @@ public class Car {
         }
 
         public Insurance() {
-            this(null,5000, null);
+            this(null, 5000, null);
         }
 
         public LocalDate getInsurancePeriod() {
@@ -79,47 +97,22 @@ public class Car {
         }
     }
 
-    private final String brand;
-    private final String model;
-    float engineVolume;
-    String color;
-    private final int year;
-    private final String country;
-    String transmissionBox;
+
+    protected double engineVolume;
+    protected String color;
+    protected String transmissionBox;
     private final String bodyType;
-    String registrationNumber;
+    protected String registrationNumber;
     private final int numberOfSeats;
-    boolean summerTires;
+    protected boolean summerTires;
     private Key key;
     private Insurance insurance;
 
-    public Car(String brand, String model, float engineVolume,
-               String color, int year, String country,
-               String transmissionBox, String bodyType,
-               String registrationNumber, int numberOfSeats,
-               boolean summerTires, Key key, Insurance insurance) {
-        if (brand == null || brand.length() == 0) {
-            this.brand = "default";
-        } else {
-            this.brand = brand;
-        }
-        if (model == null || model.length() == 0) {
-            this.model = "default";
-        } else {
-            this.model = model;
-        }
-        this.engineVolume = engineVolume;
-        if (color == null || color.length() == 0) {
-            this.color = "белый";
-        } else {
-            this.color = color;
-        }
-        this.year = year;
-        if (country == null || country.length() == 0) {
-            this.country = "'страна не указана'";
-        } else {
-            this.country = country;
-        }
+    public Car(String brand, String model, double engineVolume,String color, int year, String country, String transmissionBox, String bodyType, String registrationNumber, int numberOfSeats, boolean summerTires, Key key, Insurance insurance, int maxSpeed, String fuel) {
+        super(brand, model, color, year, country, maxSpeed, fuel);
+
+        this.engineVolume = Math.max(engineVolume, 1.5);
+
         if (registrationNumber == null) {
             this.registrationNumber = "x000xx000";
         } else {
@@ -130,7 +123,7 @@ public class Car {
         } else {
             this.bodyType = bodyType;
         }
-        if (transmissionBox == null) {
+        if (transmissionBox.length() == 0) {
             this.transmissionBox = "МКПП";
         } else {
             this.transmissionBox = transmissionBox;
@@ -146,30 +139,16 @@ public class Car {
             this.insurance = insurance;
         }
         this.summerTires = summerTires;
-        this.numberOfSeats = numberOfSeats;
-    }
-    public Car(String brand, String model, float engineVolume,
-               String color, int year, String country) {
-        this(brand, model, engineVolume, color, year, country,
-                "МКПП", "седан", "x000xx000",
-                4, true, new Key(), new Insurance());
-    }
 
-    public float getEngineVolume() {
+        this.numberOfSeats = Math.max(numberOfSeats, 2);
+
+    }
+    public double getEngineVolume() {
+        engineVolume = Math.max(engineVolume, 1.5);
         return engineVolume;
     }
     public void setEngineVolume(float engineVolume) {
         this.engineVolume = engineVolume;
-    }
-    public String getColor() {
-        return color;
-    }
-    public void setColor(String color) {
-        if (color == null || color.length() == 0) {
-            this.color = "белый";
-        } else {
-            this.color = color;
-        }
     }
     public String getTransmissionBox() {
         return transmissionBox;
@@ -197,18 +176,6 @@ public class Car {
     public void setSummerTires(boolean summerTires) {
         this.summerTires = summerTires;
     }
-    public String getBrand() {
-        return brand;
-    }
-    public String getModel() {
-        return model;
-    }
-    public int getYear() {
-        return year;
-    }
-    public String getCountry() {
-        return country;
-    }
     public String getBodyType() {
         return bodyType;
     }
@@ -231,7 +198,6 @@ public class Car {
     public void setInsurance(Insurance insurance) {
         this.insurance = insurance;
     }
-
     public boolean changingTires() {
         summerTires = !summerTires;
         return summerTires;
