@@ -27,16 +27,13 @@ public class Birds extends Animals{
 
     @Override
     void sleep() {
-        super.sleep();
     }
 
     @Override
     void wolk() {
-        super.wolk();
     }
 
     @Override
     void fly() {
-        super.fly();
     }
 }

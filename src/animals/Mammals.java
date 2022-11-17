@@ -22,19 +22,16 @@ public class Mammals extends Animals {
         return movementSpeed;
     }
 
-    @Override
+
     void eat() {
-        super.eat();
     }
 
-    @Override
+
     void sleep() {
-        super.sleep();
     }
 
-    @Override
+
     void wolk() {
-        super.wolk();
     }
 }
 

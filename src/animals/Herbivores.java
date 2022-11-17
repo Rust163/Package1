@@ -18,25 +18,22 @@ public class Herbivores extends Mammals{
         return typeOfFood;
     }
 
-    @Override
+
     public void eat() {
         System.out.println("Сначала покушать.");
-        super.eat();
     }
 
-    @Override
+
     public void sleep() {
         System.out.println("Потом поспать.");
-        super.sleep();
     }
 
-    @Override
+
     public void wolk() {
         System.out.println("Теперь погулять");
-        super.wolk();
     }
 
-    @Override
+
     public String toString() {
         return "Название животного: " + name +
                 ". Возраст: " + age +

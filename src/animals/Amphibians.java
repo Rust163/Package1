@@ -17,30 +17,26 @@ public class Amphibians extends Animals{
         return livingEnvironment;
     }
 
-    @Override
+
     public void hunt() {
         System.out.println("Охотится!");
-        super.hunt();
     }
 
-    @Override
+
     public void eat() {
         System.out.println("Ест.");
-        super.eat();
     }
 
-    @Override
+
     public void sleep() {
         System.out.println("Спит.");
-        super.sleep();
     }
 
-    @Override
+
     public void toSwim() {
         System.out.println("Плавает по озеру.");
-        super.toSwim();
     }
-    @Override
+
     public String toString() {
         return "Название животного: " + name +
                 ". Возраст: " + age +

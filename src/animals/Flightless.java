@@ -17,24 +17,20 @@ public class Flightless extends Birds{
         return typeOfMovement;
     }
 
-    @Override
+
     public void hunt() {
-        super.hunt();
     }
 
-    @Override
+
     public void eat() {
-        super.eat();
     }
 
-    @Override
+
     public void sleep() {
-        super.sleep();
     }
 
-    @Override
+
     public void wolk() {
-        super.wolk();
     }
 
     @Override

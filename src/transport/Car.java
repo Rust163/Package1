@@ -18,6 +18,68 @@ public class Car extends Transport {
             System.out.println("нужно заряжать электричеством");
         }
     }
+    protected double engineVolume;
+    protected String color;
+    protected String transmissionBox;
+    private final String bodyType;
+    protected String registrationNumber;
+    private final int numberOfSeats;
+    protected boolean summerTires;
+    private Key key;
+    private Insurance insurance;
+
+    public Car(String brand, String model, double engineVolume,String color, int year, String country, String transmissionBox, String bodyType, String registrationNumber, int numberOfSeats, boolean summerTires, Key key, Insurance insurance, int maxSpeed, String fuel) {
+        super(brand, model, color, year, country, maxSpeed, fuel);
+
+        this.engineVolume = Math.max(engineVolume, 1.5);
+
+        if (registrationNumber == null) {
+            this.registrationNumber = "x000xx000";
+        } else {
+            this.registrationNumber = registrationNumber;
+        }
+        if (bodyType == null) {
+            this.bodyType = "седан";
+        } else {
+            this.bodyType = bodyType;
+        }
+        if (transmissionBox.length() == 0) {
+            this.transmissionBox = "МКПП";
+        } else {
+            this.transmissionBox = transmissionBox;
+        }
+        if (key == null) {
+            this.key = new Key();
+        } else {
+            this.key = key;
+        }
+        if (insurance == null) {
+            this.insurance = new Insurance();
+        } else {
+            this.insurance = insurance;
+        }
+        this.summerTires = summerTires;
+
+        this.numberOfSeats = Math.max(numberOfSeats, 2);
+
+    }
+    public double getEngineVolume() {
+        engineVolume = Math.max(engineVolume, 1.5);
+        return engineVolume;
+    }
+    public void setEngineVolume(float engineVolume) {
+        this.engineVolume = engineVolume;
+    }
+    public String getTransmissionBox() {
+        return transmissionBox;
+    }
+    public void setTransmissionBox(String transmissionBox) {
+        if (transmissionBox == null) {
+            this.transmissionBox = "МКПП";
+        } else {
+            this.transmissionBox = transmissionBox;
+        }
+    }
 
     public static class Key {
 
@@ -94,70 +156,6 @@ public class Car extends Transport {
             } else {
                 System.out.println("Номер страховки корректный!");
             }
-        }
-    }
-
-
-    protected double engineVolume;
-    protected String color;
-    protected String transmissionBox;
-    private final String bodyType;
-    protected String registrationNumber;
-    private final int numberOfSeats;
-    protected boolean summerTires;
-    private Key key;
-    private Insurance insurance;
-
-    public Car(String brand, String model, double engineVolume,String color, int year, String country, String transmissionBox, String bodyType, String registrationNumber, int numberOfSeats, boolean summerTires, Key key, Insurance insurance, int maxSpeed, String fuel) {
-        super(brand, model, color, year, country, maxSpeed, fuel);
-
-        this.engineVolume = Math.max(engineVolume, 1.5);
-
-        if (registrationNumber == null) {
-            this.registrationNumber = "x000xx000";
-        } else {
-            this.registrationNumber = registrationNumber;
-        }
-        if (bodyType == null) {
-            this.bodyType = "седан";
-        } else {
-            this.bodyType = bodyType;
-        }
-        if (transmissionBox.length() == 0) {
-            this.transmissionBox = "МКПП";
-        } else {
-            this.transmissionBox = transmissionBox;
-        }
-        if (key == null) {
-            this.key = new Key();
-        } else {
-            this.key = key;
-        }
-        if (insurance == null) {
-            this.insurance = new Insurance();
-        } else {
-            this.insurance = insurance;
-        }
-        this.summerTires = summerTires;
-
-        this.numberOfSeats = Math.max(numberOfSeats, 2);
-
-    }
-    public double getEngineVolume() {
-        engineVolume = Math.max(engineVolume, 1.5);
-        return engineVolume;
-    }
-    public void setEngineVolume(float engineVolume) {
-        this.engineVolume = engineVolume;
-    }
-    public String getTransmissionBox() {
-        return transmissionBox;
-    }
-    public void setTransmissionBox(String transmissionBox) {
-        if (transmissionBox == null) {
-            this.transmissionBox = "МКПП";
-        } else {
-            this.transmissionBox = transmissionBox;
         }
     }
     public String getRegistrationNumber() {
